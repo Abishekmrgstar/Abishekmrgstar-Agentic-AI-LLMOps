@@ -1,0 +1,86 @@
+{
+  "family": "trip-planner-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::{ACCOUNT_ID}:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "backend",
+      "image": "{ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/trip-planner:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "GROQ_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "TAVILAY_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "OPENWEATHERMAP_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "EXCHANGE_RATE_API_KEY",
+          "value": ""
+        }
+      ],
+      "command": ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/trip-planner",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "backend"
+        }
+      }
+    },
+    {
+      "name": "frontend",
+      "image": "{ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/trip-planner:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8501,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        {
+          "name": "GROQ_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "TAVILAY_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "OPENWEATHERMAP_API_KEY",
+          "value": ""
+        },
+        {
+          "name": "EXCHANGE_RATE_API_KEY",
+          "value": ""
+        }
+      ],
+      "command": ["streamlit", "run", "streamlit_app.py", "--server.port", "8501", "--server.address", "0.0.0.0"],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/trip-planner",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "frontend"
+        }
+      }
+    }
+  ]
+}

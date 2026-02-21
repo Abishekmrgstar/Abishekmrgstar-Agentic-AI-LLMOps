@@ -1,0 +1,35 @@
+{
+  "ServiceName": "trip-planner-streamlit",
+  "SourceConfiguration": {
+    "ImageRepository": {
+      "ImageIdentifier": "843897428400.dkr.ecr.us-east-1.amazonaws.com/trip-planner:latest",
+      "ImageRepositoryType": "ECR",
+      "ImageConfiguration": {
+        "Port": "8501",
+        "RuntimeEnvironmentVariables": {
+          "BACKEND_URL": "http://localhost:8000",
+          "GROQ_API_KEY": "your_groq_api_key_here",
+          "OPENAI_API_KEY": "your_openai_api_key_here",
+          "TAVILY_API_KEY": "your_tavily_api_key_here",
+          "GOOGLE_API_KEY": "your_google_api_key_here"
+        }
+      }
+    },
+    "AutoDeploymentsEnabled": true,
+    "AuthenticationConfiguration": {
+      "AccessRoleArn": "arn:aws:iam::843897428400:role/AppRunnerECRAccessRole"
+    }
+  },
+  "InstanceConfiguration": {
+    "Cpu": "1024",
+    "Memory": "2048"
+  },
+  "HealthCheckConfiguration": {
+    "Protocol": "TCP",
+    "Path": "/",
+    "Interval": 30,
+    "Timeout": 10,
+    "HealthyThreshold": 3,
+    "UnhealthyThreshold": 5
+  }
+}

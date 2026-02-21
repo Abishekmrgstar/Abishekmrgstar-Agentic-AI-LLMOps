@@ -1,0 +1,16 @@
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+.env
+.git/
+.gitignore
+*.md
+notebook/
+test_*.py
+my_graph.png
