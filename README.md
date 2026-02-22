@@ -46,15 +46,22 @@ The agent is defined in [agent/agentic_workflow.py](agent/agentic_workflow.py):
 ```mermaid
 flowchart TD
 	START --> Agent
-	Agent -->|tool call| Tools
-	Tools --> Agent
-	Agent --> END
+  Agent -->|tool call| Weather[Weather Tools]
+  Agent -->|tool call| Places[Place Search Tools]
+  Agent -->|tool call| Calc[Expense Calculator Tools]
+  Agent -->|tool call| FX[Currency Converter Tool]
+  Weather --> Agent
+  Places --> Agent
+  Calc --> Agent
+  FX --> Agent
+  Agent --> END
 ```
 
-`Agent` uses the system prompt from [prompt_library/prompt.py](prompt_library/prompt.py) and binds tools for function calls.
-
-## Local run (no Docker)
-
+Available tools:
+- **Weather**: `get_current_weather`, `get_weather_forecast`
+- **Place Search**: `search_attractions`, `search_restaurants`, `search_activities`, `search_transportation`
+- **Expense Calculator**: `estimate_total_hotel_cost`, `calculate_total_expense`, `calculate_daily_expense_budget`
+- **Currency Converter**: `convert_currency`
 1) Create and activate a virtual environment.
 2) Install dependencies:
 
