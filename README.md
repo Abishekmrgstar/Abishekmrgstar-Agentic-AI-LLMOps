@@ -1,4 +1,4 @@
-🚀 Agentic AI Platform with LLMOps & Observability
+#  🚀 Agentic AI Platform with LLMOps & Observability
 [![Python](https://skillicons.dev/icons?i=python)](https://www.python.org/)
 [![FastAPI](https://skillicons.dev/icons?i=fastapi)](https://fastapi.tiangolo.com/)
 [![Docker](https://skillicons.dev/icons?i=docker)](https://www.docker.com/)
